@@ -31,6 +31,7 @@ ESP32-C3 SoC 芯片采用 40 nm 工艺制成，支持以下功能：
 |14   |GND    |接地                                |30   |BOOT* |GPIO09 输入(BOOTMODE)         |
 |15   |PWB    |芯片3.3V供电控制,高电平有效,不用可悬空|31   |5V    |5V电源接口，与USB的VUSBS相连  |
 |16   |5V     |5V电源接口,与USB的VUSBS相连          |32   |GND   |接地                         |
+
 注：带星号电源域为 VDD3P3_CPU, 带^电源域为 VDD3P3_RTC
 
 ![合宙屏幕扩展板](./img/hz_lcd_exp.png)
