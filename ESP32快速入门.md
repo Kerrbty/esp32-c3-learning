@@ -65,6 +65,11 @@ ESP32-C3 SoC 芯片采用 40 nm 工艺制成，支持以下功能：
 
 ##  设置编译环境（推荐Linux环境）
 
+Linux 下一些工具最低版本要求: 
+- python 3.7 
+- bash 4.4 
+- make 3.5
+
 ### 1. 安装工具链 (编译工具所需环境)
 
 Windows ESP-IDF 离线工具安装器： [https://dl.espressif.com/dl/esp-idf/?idf=4.4](https://dl.espressif.com/dl/esp-idf/?idf=4.4)
