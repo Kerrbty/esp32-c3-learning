@@ -64,20 +64,22 @@ ESP32-C3 SoC 芯片采用 40 nm 工艺制成，支持以下功能：
 
 ![下载示意图](./img/what-you-need.png)
 
-##  设置编译环境（推荐Linux环境）
+## 编译LuatOS系统（推荐Linux环境）
 
 Linux 下一些工具最低版本要求: 
 - python 3.7 
 - bash 4.4 
 - CMake 3.5
 
-### 1. 安装工具链 (编译工具所需环境)
+### 1.1 Windows 安装工具链（编译环境）
 
 Windows ESP-IDF 离线工具安装器： [https://dl.espressif.com/dl/esp-idf/?idf=4.4](https://dl.espressif.com/dl/esp-idf/?idf=4.4)
 
 ![安装界面](./img/esp-idf-installer-screenshot.png)
 
-   Linux 安装命令：
+### 1.2 Linux 获取 ESP-IDF 4.4 (编译工具设置)
+
+#### a. 首先安装依赖库：
 ```shell
 # Ubuntu / Debian
 sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
@@ -91,13 +93,29 @@ sudo pacman -S --needed gcc git make flex bison gperf python-pip cmake ninja cca
 
 注： ESP-IDF 需要 CMake3.5 或以上版本 
 
-### 2. 获取 ESP-IDF (编译工具设置)
 
-下载乐鑫提供的软件库文件 [ESP-IDF 克隆仓库](https://git.jq99.top:9999/lgj/esp-idf) 或者 [ESP-IDF 官方仓库](https://github.com/espressif/esp-idf)
+#### b. 下载乐鑫提供的软件库文件 [ESP-IDF 克隆仓库](https://git.jq99.top:9999/lgj/esp-idf) 或者 [ESP-IDF 官方仓库](https://github.com/espressif/esp-idf)
+注: 加速代理地址 https://ghproxy.com/ 
 
-然后使用命令行安装(esp32c3)：
+切换到分支 release/v4.4
+```shell
+git branch v4.4
+git checkout v4.4
+```
 
-Windows Shell
+如果不是从github下载仓库，需要运行脚本：
+```shell
+./tools/set-submodules-to-github.sh
+```
+
+接着更新子模块：
+```shell
+git submodule update --init --recursive
+```
+
+#### c. 然后使用命令行安装(esp32c3)：
+
+Windows Shell 
 ```dos
 ; bat
 install.bat esp32c3
@@ -119,15 +137,29 @@ Linux Shell
 
 ### 3.拉取 LuatOS-ESP32 进行编译 
 
-代码下载 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS-ESP32.git)  或者 [官方仓库](https://gitee.com/dreamcmi/LuatOS-ESP32.git) 
+esp32i硬件部分代码下载 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS-ESP32.git)  或者 [官方仓库](https://github.com/dreamcmi/LuatOS-ESP32.git) 
+LuatOS系统源码下载同一目录下 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS.git) 或者 [官方仓库](https://github.com/openLuat/LuatOS.git)
 
-进入仓库目录运行命令：
+```shell
+git clone https://gitee.com/dreamcmi/LuatOS-ESP32.git
+git clone https://gitee.com/openLuat/LuatOS.git
+```
+
+进入 LuatOS-ESP32 仓库运行命令：
 ```shell
 idf.py set-target esp32c3
 idf.py build
 ```
 
-编译完文件在  , 可以直接使用 tools 下面的 esp32v3.py 脚本刷机 
+编译完文件在  build/luatos_esp32.bin 
+
+### 4.直接命令行刷机
+
+```shell
+idf.py -p com3 flash
+```
 
 ### 4.生成soc文件 (用luatools刷机)
 
+```shell
+```
