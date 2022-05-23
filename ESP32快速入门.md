@@ -1,4 +1,6 @@
-# ESP32-C3 快速入门 
+# ESP32-C3 快速入门 {ignore}
+
+[toc]
 
 ## 概述
 
@@ -64,7 +66,7 @@ ESP32-C3 SoC 芯片采用 40 nm 工艺制成，支持以下功能：
 
 ![下载示意图](./img/what-you-need.png)
 
-## 编译LuatOS系统（推荐Linux环境）
+## 编译LuatOS系统（推荐Windows, 直接安装4.4版离线包即可）
 
 Linux 下一些工具最低版本要求: 
 - python 3.7 
@@ -82,13 +84,13 @@ Windows ESP-IDF 离线工具安装器： [https://dl.espressif.com/dl/esp-idf/?i
 #### a. 首先安装依赖库：
 ```shell
 # Ubuntu / Debian
-sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+$ sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
 # Centos7 / 8
-sudo yum -y update && sudo yum install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache dfu-util libusbx
+$ sudo yum -y update && sudo yum install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache dfu-util libusbx
 
 # Arch
-sudo pacman -S --needed gcc git make flex bison gperf python-pip cmake ninja ccache dfu-util libusb
+$ sudo pacman -S --needed gcc git make flex bison gperf python-pip cmake ninja ccache dfu-util libusb
 ```
 
 注： ESP-IDF 需要 CMake3.5 或以上版本 
@@ -99,18 +101,18 @@ sudo pacman -S --needed gcc git make flex bison gperf python-pip cmake ninja cca
 
 切换到分支 release/v4.4
 ```shell
-git branch v4.4
-git checkout v4.4
+$ git branch v4.4
+$ git checkout v4.4
 ```
 
 如果不是从github下载仓库，需要运行脚本：
 ```shell
-./tools/set-submodules-to-github.sh
+$ ./tools/set-submodules-to-github.sh
 ```
 
 接着更新子模块：
 ```shell
-git submodule update --init --recursive
+$ git submodule update --init --recursive
 ```
 
 #### c. 然后使用命令行安装(esp32c3)：
@@ -118,48 +120,52 @@ git submodule update --init --recursive
 Windows Shell 
 ```dos
 ; bat
-install.bat esp32c3
+C:\> install.bat esp32c3
 
 ; powershell 
-./install.ps1 esp32c3
+C:\> ./install.ps1 esp32c3
 ```
 
 Linux Shell
 ```shell
-./install.sh esp32c3
+$ ./install.sh esp32c3
 ```
 
 设置环境变量(idf.py 加入环境变量):
 ```shell
-. ./export.sh
+$ . ./export.sh
 ```
 
 
-### 3.拉取 LuatOS-ESP32 进行编译 
+### 2 拉取 LuatOS-ESP32 进行编译 
 
 esp32i硬件部分代码下载 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS-ESP32.git)  或者 [官方仓库](https://github.com/dreamcmi/LuatOS-ESP32.git) 
 LuatOS系统源码下载同一目录下 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS.git) 或者 [官方仓库](https://github.com/openLuat/LuatOS.git)
 
 ```shell
-git clone https://gitee.com/dreamcmi/LuatOS-ESP32.git
-git clone https://gitee.com/openLuat/LuatOS.git
+$ git clone https://gitee.com/dreamcmi/LuatOS-ESP32.git
+$ git clone https://gitee.com/openLuat/LuatOS.git
 ```
 
 进入 LuatOS-ESP32 仓库运行命令：
 ```shell
-idf.py set-target esp32c3
-idf.py build
+$ idf.py set-target esp32c3
+$ idf.py build
 ```
 
 编译完文件在  build/luatos_esp32.bin 
 
-### 4.直接命令行刷机
+
+### 3.1 直接命令行刷机
 
 ```shell
-idf.py -p com3 flash
+$ sudo idf.py -p com3 flash
 ```
 
-### 4.生成soc文件 (用luatools刷机)
+### 3.2 生成soc文件 (用luatools刷机)
 
+进入 LuatOS-ESP32/tools 目录：
 ```shell
+$ sudo pip install -r requirements.txt
+$ python esp32v3.py -t esp32c3 -p
 ```
