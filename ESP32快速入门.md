@@ -140,6 +140,7 @@ $ . ./export.sh
 ### 2 拉取 LuatOS-ESP32 进行编译 
 
 esp32i硬件部分代码下载 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS-ESP32.git)  或者 [官方仓库](https://github.com/dreamcmi/LuatOS-ESP32.git) 
+
 LuatOS系统源码下载同一目录下 [镜像仓库](https://git.jq99.top:9999/lgj/LuatOS.git) 或者 [官方仓库](https://github.com/openLuat/LuatOS.git)
 
 ```shell
@@ -165,7 +166,10 @@ $ sudo idf.py -p com3 flash
 ### 3.2 生成soc文件 (用luatools刷机)
 
 进入 LuatOS-ESP32/tools 目录：
+
 ```shell
 $ sudo pip install -r requirements.txt
 $ python esp32v3.py -t esp32c3 -p
 ```
+
+soc 文件就生成在 LuatOS-ESP32/tools 目录 
