@@ -165,7 +165,7 @@ $ sudo idf.py -p com3 flash
 
 ### 3.2 生成soc文件 (用luatools刷机)
 
-进入 LuatOS-ESP32/tools 目录：
+进入 LuatOS-ESP32/tools 目录(要求python3.8)：
 
 ```shell
 $ sudo pip install -r requirements.txt
@@ -173,3 +173,21 @@ $ python esp32v3.py -t esp32c3 -p
 ```
 
 soc 文件就生成在 LuatOS-ESP32/tools 目录 
+
+### 4.1 下载lua脚本 
+
+a. 打开luatools,选择串口,打开项目管理测试窗口
+
+b. 新建一个项目,选择编译好的Core包,添加需要允许的lua脚本
+
+c. 选择下载底包和脚本 (如果已下载过底包,直接下载脚本即可)
+
+![luatools](./img/lua_demo.png)
+
+### 4.2 调试lua脚本 
+
+a. vscode 中搜索插件 LuatIDE 
+
+b. 新建一个项目 
+
+c. 开启调试 
