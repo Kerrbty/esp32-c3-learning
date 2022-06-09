@@ -5,13 +5,15 @@
 ## 概述
 
 ESP32-C3 SoC 芯片采用 40 nm 工艺制成，支持以下功能：
-- 2.4 GHz Wi-Fi
-- 低功耗蓝牙
-- 高性能 32 位 RISC-V 单核处理器
-- 多种外设
-- 内置安全硬件
+- 2.4 GHz Wi-Fi, 支持IEEE 802.11b/g/n协议, 速率 150 Mbps  
+- 低功耗蓝牙, Bluetooth 5, 
+- 高性能 32 位 RISC-V 单核处理器，主频 160 MHZ
+- 片上 384 KB 内核功能调用 ROM, 400 KB 数据指令SRAM（其中 16 KB 专用于 cache）, 8 KB RTC SRAM (Deep-sleep保存数据)
+- 外部flash 最大支持 16 MB 
 
 ## 合宙接口定义
+
+[合宙ESP32-C3开发板wiki](https://wiki.luatos.com/chips/esp32c3/index.html)
 
 ![合宙ESP32-C3](./img/hz_esp32c3.png)
 
@@ -67,6 +69,8 @@ ESP32-C3 SoC 芯片采用 40 nm 工艺制成，支持以下功能：
 ![下载示意图](./img/what-you-need.png)
 
 ## 编译LuatOS系统（推荐Windows, 直接安装4.4版离线包即可）
+
+[ 乐鑫ESP32-C3芯片资料 ](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/index.html)
 
 Linux 下一些工具最低版本要求: 
 - python 3.7 
@@ -151,6 +155,7 @@ $ git clone https://gitee.com/openLuat/LuatOS.git
 进入 LuatOS-ESP32 仓库运行命令：
 ```shell
 $ idf.py set-target esp32c3
+$ idf.py menuconfig  # 按需修改配置,日志等级(Bootloader config -> Bootloader log verbosity) 
 $ idf.py build
 ```
 
