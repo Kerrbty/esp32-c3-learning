@@ -1,43 +1,43 @@
-# Arduino ¿ª·¢»·¾³´î½¨ {ignore}
+# Arduino å¼€å‘ç¯å¢ƒæ­å»º {ignore}
 
 [toc]
 
-## °²×° Arduino 
+## å®‰è£… Arduino 
 
-¹ÙÍøµØÖ·: https://www.arduino.cc/en/software
+å®˜ç½‘åœ°å€: https://www.arduino.cc/en/software
 
-## ÉèÖÃ Support Soc ±í¸ñ
+## è®¾ç½® Support Soc è¡¨æ ¼
 
-ÉèÖÃ: ÎÄ¼ş --> Ê×Ñ¡Ïî --> ¸½¼Ó¿ª·¢°å¹ÜÀíÆ÷ÍøÖ· ( ¶à¸öÓÃ¶ººÅ¸ô¿ª, githubÊ¹ÓÃ [¼ÓËÙµØÖ·](https://hub.0z.gs) ,  ²Ö¿â [Release ÀïÃæÓĞ×îĞÂ±í¸ñµØÖ·](https://hub.0z.gs/espressif/arduino-esp32/releases) )
+è®¾ç½®: æ–‡ä»¶ --> é¦–é€‰é¡¹ --> é™„åŠ å¼€å‘æ¿ç®¡ç†å™¨ç½‘å€ ( å¤šä¸ªç”¨é€—å·éš”å¼€, githubä½¿ç”¨ [åŠ é€Ÿåœ°å€](https://hub.0z.gs) ,  ä»“åº“ [Release é‡Œé¢æœ‰æœ€æ–°è¡¨æ ¼åœ°å€](https://hub.0z.gs/espressif/arduino-esp32/releases) )
 
 ```text
-ÎÈ¶¨°æ£º
+ç¨³å®šç‰ˆï¼š
 https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
 
-¿ª·¢°æ£º
+å¼€å‘ç‰ˆï¼š
 https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json
 ```
 
 
-## °²×°À©Õ¹²å¼ş 
+## å®‰è£…æ‰©å±•æ’ä»¶ 
 
-Èë¿Ú:  ¹¤¾ß --> ¿ª·¢°å: "Arduino Uno" --> ¿ª·¢°å¹ÜÀíÆ÷ --> ËÑË÷"esp32" --> ËÑË÷½á¹ûÀïÃæÑ¡Ôñ°æ±¾°²×° 
+å…¥å£:  å·¥å…· --> å¼€å‘æ¿: "Arduino Uno" --> å¼€å‘æ¿ç®¡ç†å™¨ --> æœç´¢"esp32" --> æœç´¢ç»“æœé‡Œé¢é€‰æ‹©ç‰ˆæœ¬å®‰è£… 
 
-ÏÂÔØ°²×°°üÎ»ÓÚ: %arduino%/staging/packages (prefereces.txt Ä¿Â¼ÏÂ)
+ä¸‹è½½å®‰è£…åŒ…ä½äº: %arduino%/staging/packages (prefereces.txt ç›®å½•ä¸‹)
 
-°²×°ºÃµÄ¿âÎª¾²Ì¬¿â, Ô´ÂëÔÚgithubÉÏ:  https://hub.0z.gs/espressif/arduino-esp32
+å®‰è£…å¥½çš„åº“ä¸ºé™æ€åº“, æºç åœ¨githubä¸Š:  https://hub.0z.gs/espressif/arduino-esp32
 
 
-## ºÏÖæµÄESP32C3°å×ÓÖ§³Ö Serial.print ´òÓ¡ÈÕÖ¾ĞèÒªĞŞ¸Ä¿âÔ´Âë: 
+## åˆå®™çš„ESP32C3æ¿å­æ”¯æŒ Serial.print æ‰“å°æ—¥å¿—éœ€è¦ä¿®æ”¹åº“æºç : 
 
-×¢£ºÒÔÏÂµÚÈı·½¿âÎÄ¼şÄ¿Â¼¾ùÔÚ preferebces.txt Í¬Ä¿Â¼ÏÂ ( ÎÄ¼ş--> Ê×Ñ¡Ïî , ÔÚArduino°²×°Ä¿Â¼ÏÂĞÂ½¨Ò»¸ö portable Ä¿Â¼ ¼´¿ÉĞŞ¸Äµ½°²×°Ä¿Â¼ÏÂ)£º
+æ³¨ï¼šä»¥ä¸‹ç¬¬ä¸‰æ–¹åº“æ–‡ä»¶ç›®å½•å‡åœ¨ preferebces.txt åŒç›®å½•ä¸‹ ( æ–‡ä»¶--> é¦–é€‰é¡¹ , åœ¨Arduinoå®‰è£…ç›®å½•ä¸‹æ–°å»ºä¸€ä¸ª portable ç›®å½• å³å¯ä¿®æ”¹åˆ°å®‰è£…ç›®å½•ä¸‹)ï¼š
 
-![Ê×Ñ¡ÏîÄ¿Â¼](./img/arduino_config.png)
+![é¦–é€‰é¡¹ç›®å½•](./img/arduino_config.png)
 
 ```C++
 // ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.h 
 extern HWCDC Serial;
-// ĞŞ¸ÄÎª 
+// ä¿®æ”¹ä¸º 
 #if CONFIG_IDF_TARGET_ESP32C3
 extern HWCDC HWCDCSerial;
 #else
@@ -46,7 +46,7 @@ extern HWCDC Serial;
 
 // ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.cpp
 HWCDC Serial;
-// ĞŞ¸ÄÎª 
+// ä¿®æ”¹ä¸º 
 #if CONFIG_IDF_TARGET_ESP32C3
 HWCDC HWCDCSerial;
 #else
@@ -55,17 +55,17 @@ HWCDC Serial;
 
 // ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.h
 extern HardwareSerial Serial0;
-// ºóÃæ¼ÓÈë: 
+// åé¢åŠ å…¥: 
 #if CONFIG_IDF_TARGET_ESP32C3
 extern HardwareSerial Serial;
 #endif  // CONFIG_IDF_TARGET_ESP32C3 
 
 // ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.cpp 
 HardwareSerial Serial0(0);
-// ºóÃæ¼ÓÈë: 
+// åé¢åŠ å…¥: 
 #if CONFIG_IDF_TARGET_ESP32C3
 HardwareSerial Serial(0);
 #endif  // CONFIG_IDF_TARGET_ESP32C3 
 
-// ×¢Òâ: sdk ÖĞ Serial1 Ê¹ÓÃRX 18, TX 19, ÓëºÏÖæLUATOS²»Í¬ 
+// æ³¨æ„: sdk ä¸­ Serial1 ä½¿ç”¨RX 18, TX 19, ä¸åˆå®™LUATOSä¸åŒ 
 ```
