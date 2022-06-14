@@ -30,8 +30,12 @@ https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32
 
 ## 合宙的ESP32C3板子支持 Serial.print 打印日志需要修改库源码: 
 
+注：以下第三方库文件目录均在 preferebces.txt 同目录下 ( 文件--> 首选项 , 在Arduino安装目录下新建一个 portable 目录 即可修改到安装目录下)：
+
+![首选项目录](./img/arduino_config.png)
+
 ```C++
-// /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.h 
+// ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.h 
 extern HWCDC Serial;
 // 修改为 
 #if CONFIG_IDF_TARGET_ESP32C3
@@ -40,7 +44,7 @@ extern HWCDC HWCDCSerial;
 extern HWCDC Serial;
 #endif // CONFIG_IDF_TARGET_ESP32C3 
 
-// /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.cpp
+// ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.cpp
 HWCDC Serial;
 // 修改为 
 #if CONFIG_IDF_TARGET_ESP32C3
@@ -49,14 +53,14 @@ HWCDC HWCDCSerial;
 HWCDC Serial;
 #endif  // CONFIG_IDF_TARGET_ESP32C3 
 
-// /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.h
+// ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.h
 extern HardwareSerial Serial0;
 // 后面加入: 
 #if CONFIG_IDF_TARGET_ESP32C3
 extern HardwareSerial Serial;
 #endif  // CONFIG_IDF_TARGET_ESP32C3 
 
-// /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.cpp 
+// ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.cpp 
 HardwareSerial Serial0(0);
 // 后面加入: 
 #if CONFIG_IDF_TARGET_ESP32C3
