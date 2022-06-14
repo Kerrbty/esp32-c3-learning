@@ -2,9 +2,17 @@
 
 [toc]
 
+## 整个ESP32-C3启动流程 
+
+1. 在SOC复位以后, CPU 立即开始执行, 执行所有初始化操作. 复位向量代码位于 ESP32-C3 芯片掩膜 ROM 处, 且不能被修改。放在 flash 的 0x0 偏移地址 (注: 旧版使用 0x1000 偏移, 使用宏 CONFIG_BOOTLOADER_OFFSET_IN_FLASH 配置) 处的二进制就是二级引导程序（由一级 ROM 中的bootloader进行加载到 RAM 中），代码在 idf 工具包里面, 详情见 [官方文档](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-guides/startup.html)。
+
+2. 二级 bootloader 整个流程很好理解(入口: bootloader_start.c), 启动过程是单核运行（esp32-c3就是单核处理器）, 二级bootloader 从Flash中加载分区表 (Flash的 0x8000 偏移地址, CONFIG_PARTITION_TABLE_OFFSET 宏定义， 最大长度 0xC00 ) 和主程序镜像到内存, 主程序中包含了 RAM 段和通过 Flash 高速缓存映射的只读段
+
+3. 主程序开始运行(主程序入口 app_main), 这时第二个 CPU 和 RTOS 的调度器可以开始运行 
+
 ## bootloader 分析
 
-bootloader 代码不在 LuatOS 中,在 idf 工具链当中, github 地址: https://github.com/espressif/esp-idf/tree/master/components
+bootloader 代码不在 LuatOS 中,在 idf 工具链当中, 可以单独从 github 下载，地址: https://github.com/espressif/esp-idf/tree/master/components
 
 在 LuatOS-ESP 编译中,使用到如下文件:
 ```list
@@ -82,13 +90,6 @@ $(IDF_DIR)/components/log/log_noos.c
 $(IDF_DIR)/components/bootloader/subproject/main/bootloader_start.c       { 入口文件 }
 ```
 
-1. 在SOC复位以后, CPU 立即开始执行, 执行所有初始化操作. 复位向量代码位于 ESP32-C3 芯片掩膜 ROM 处, 且不能被修改。放在 flash 的 0x0 偏移地址 (注: 旧版使用 0x1000 偏移, 使用宏 CONFIG_BOOTLOADER_OFFSET_IN_FLASH 配置) 处的二进制就是二级引导程序（由一级 ROM 中的bootloader进行加载到 RAM 中），代码在 idf 工具包里面, 详情见 [官方文档](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-guides/startup.html)。
-
-2. 二级 bootloader 整个流程很好理解(入口: bootloader_start.c), 启动过程是单核运行（esp32-c3就是单核处理器）, 二级bootloader 从Flash中加载分区表 (Flash的 0x8000 偏移地址, CONFIG_PARTITION_TABLE_OFFSET 宏定义， 最大长度 0xC00 ) 和主程序镜像到内存, 主程序中包含了 RAM 段和通过 Flash 高速缓存映射的只读段
-
-3. 主程序开始运行, 这时第二个 CPU 和 RTOS 的调度器可以开始运行
-
-
 二级 bootloader 启动代码如下 (components/bootloader/subproject/main/bootloader_start.c): 
 
 ```C++
@@ -153,4 +154,7 @@ bootloader (build\bootloader\bootloader.bin) 格式, 前 0x16 字节是一个 es
 系统分区 (build\luatos_esp32.bin) 格式 
 
 ![luatos系统](./img/luatos_esp32_image.png)
+
+## LuatOS 系统分析 
+
 
