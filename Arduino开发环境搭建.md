@@ -8,7 +8,7 @@
 
 ## 设置 Support Soc 表格
 
-设置: 文件 --> 首选项 --> 附加开发板管理器网址 ( 多个用逗号隔开, github使用加速地址，Release里面有最新的网址 )
+设置: 文件 --> 首选项 --> 附加开发板管理器网址 ( 多个用逗号隔开, github使用 [加速地址](https://hub.0z.gs) ,  仓库 [Release 里面有最新表格地址](https://hub.0z.gs/espressif/arduino-esp32/releases) )
 
 ```text
 稳定版：
