@@ -122,6 +122,10 @@ $ git submodule update --init --recursive
 #### c. 然后使用命令行安装(esp32c3)：
 
 Windows Shell 
+
+- windows 推荐直接运行安装以后生成的快捷方式 ESP-IDF 4.4 CMD/PowerShell (可忽略这步)
+- Linux Termial 到安装目录下运行下面命令，初始化编译环境
+
 ```dos
 ; bat
 C:\> install.bat esp32c3
