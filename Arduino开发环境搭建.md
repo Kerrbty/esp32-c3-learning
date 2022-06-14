@@ -8,7 +8,7 @@
 
 ## 设置 Support Soc 表格
 
-设置: 文件 --> 首选项 --> 附加开发板管理器网址 (多个用逗号隔开)
+设置: 文件 --> 首选项 --> 附加开发板管理器网址 ( 多个用逗号隔开, github使用加速地址，Release里面有最新的网址 )
 
 ```text
 稳定版：
@@ -34,22 +34,34 @@ https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32
 // /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.h 
 extern HWCDC Serial;
 // 修改为 
+#if CONFIG_IDF_TARGET_ESP32C3
 extern HWCDC HWCDCSerial;
+#else
+extern HWCDC Serial;
+#endif // CONFIG_IDF_TARGET_ESP32C3 
 
 // /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.cpp
 HWCDC Serial;
 // 修改为 
+#if CONFIG_IDF_TARGET_ESP32C3
 HWCDC HWCDCSerial;
+#else
+HWCDC Serial;
+#endif  // CONFIG_IDF_TARGET_ESP32C3 
 
 // /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.h
 extern HardwareSerial Serial0;
-// 后面加入一行: 
+// 后面加入: 
+#if CONFIG_IDF_TARGET_ESP32C3
 extern HardwareSerial Serial;
+#endif  // CONFIG_IDF_TARGET_ESP32C3 
 
 // /packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HardwareSerial.cpp 
 HardwareSerial Serial0(0);
-// 后面加入一行: 
+// 后面加入: 
+#if CONFIG_IDF_TARGET_ESP32C3
 HardwareSerial Serial(0);
+#endif  // CONFIG_IDF_TARGET_ESP32C3 
 
 // 注意: sdk 中 Serial1 使用RX 18, TX 19, 与合宙LUATOS不同 
 ```

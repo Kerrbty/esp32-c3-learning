@@ -164,6 +164,8 @@ $ idf.py build
 
 ### 3.1 直接命令行刷机
 
+[CH343驱动下载](https://www.wch.cn/downloads/CH343SER_EXE.html)
+
 ```shell
 $ sudo idf.py -p com3 flash
 ```
