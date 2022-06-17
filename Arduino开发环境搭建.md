@@ -27,15 +27,18 @@ https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32
 
 安装好的库为静态库, 源码在github上:  https://hub.0z.gs/espressif/arduino-esp32
 
+注：第三方开发板均在 preferebces.txt 同目录下 ( 文件--> 首选项 , 在Arduino安装目录下新建一个 portable 目录 即可修改到安装目录下)：
+
+![首选项目录](./img/arduino_config.png)
+
+注：开发库在我的文档 Arduino/libraries/ 目录下，比如 TFT_eSPI：
+
+![开发库](./img/arduino_library.png)
 
 ## 合宙ESP32C3板子支持 Serial.print 打印日志: 
 
 - 重要提示：合宙板子上面有 CH343 的 (经典款) 才需要修改，没有的 (新款) 不需要
 - 在合宙经典版的 ESP32C3 开发板上面会贴有 CH343 芯片，而这个芯片会导致使用 HardwareSerial 打印日志无法正常工作（esp32c3芯片内部已经实现了串口功能，所以再用 ch343 串口芯片数据转一次就不正确了），需要将 Serial 定义改成 HWCDC 以后直接针脚输出，再经由 ch343 串口芯片就正常工作了 
-
-注：以下第三方库文件目录均在 preferebces.txt 同目录下 ( 文件--> 首选项 , 在Arduino安装目录下新建一个 portable 目录 即可修改到安装目录下)：
-
-![首选项目录](./img/arduino_config.png)
 
 ```C++
 // ./packages/esp32/hardware/esp32/2.0.3-RC1/cores/esp32/HWCDC.h 
