@@ -189,11 +189,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\resource.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
 			<File
-				RelativePath=".\res\resource.h"
+				RelativePath=".\vlw_format.h"
 				>
 			</File>
 		</Filter>

@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <tchar.h>
+#include <set>
 #include "common.h"
 #include "res/resource.h"
 #pragma comment(lib, "shlwapi.lib")
@@ -105,14 +106,34 @@ DWORD WINAPI SaveUnicodeCodeThread(LPVOID lparam)
             FILE* fp = _tfopen(lpNewFile+8, TEXT("w+"));
             if (fp)
             {
-                for (DWORD i=0; i<dwCount; i++)
+                DWORD i = 0;
+                std::set<WCHAR> repeatFiltr; // 重复过滤器 
+                for (i=0; i<dwCount; i++)
+                {
+                    // 过滤ASCII表数据 
+                    if ( lpTxt[i]>0x7F )
+                    {
+                        // 过滤重复数据 
+                        if ( repeatFiltr.find(lpTxt[i]) == repeatFiltr.end() )
+                        {
+                            repeatFiltr.insert(lpTxt[i]);
+                        }
+                    }
+                }
+
+                i = 0;
+                for (std::set<WCHAR>::iterator it = repeatFiltr.begin();
+                    it != repeatFiltr.end();
+                    it++)
                 {
                     if (i%8 == 0)
                     {
                         _ftprintf(fp, TEXT("\n    "));
                     }
-                    _ftprintf(fp, TEXT("0x%04x, "), lpTxt[i]);
+                    _ftprintf(fp, TEXT("0x%04x, "), *it);
+                    i++;
                 }
+                _ftprintf(fp, TEXT("\n"));
                 fclose(fp);
                 ShellExecute(GetDesktopWindow(), TEXT("open"), TEXT("explorer"), lpNewFile, NULL, SW_SHOW);
             }
