@@ -99,11 +99,12 @@ DWORD WINAPI SaveUnicodeCodeThread(LPVOID lparam)
         LPTSTR lpNewFile = new TCHAR[MAX_PATH*2];
         if (lpNewFile)
         {
-            _tcscpy(lpNewFile, TEXT("/select,"));
-            _tcscpy(lpNewFile+8, lpFileName);
-            LPTSTR lpExt = PathFindExtension(lpNewFile+8);
+            int nOffset = 9;
+            _tcscpy(lpNewFile, TEXT("/select,\""));
+            _tcscpy(lpNewFile+nOffset, lpFileName);
+            LPTSTR lpExt = PathFindExtension(lpNewFile+nOffset);
             _tcscpy(lpExt, TEXT(".java"));
-            FILE* fp = _tfopen(lpNewFile+8, TEXT("w+"));
+            FILE* fp = _tfopen(lpNewFile+nOffset, TEXT("w+"));
             if (fp)
             {
                 DWORD i = 0;
@@ -135,7 +136,13 @@ DWORD WINAPI SaveUnicodeCodeThread(LPVOID lparam)
                 }
                 _ftprintf(fp, TEXT("\n"));
                 fclose(fp);
-                ShellExecute(GetDesktopWindow(), TEXT("open"), TEXT("explorer"), lpNewFile, NULL, SW_SHOW);
+
+                _tcscat(lpNewFile, TEXT("\""));
+                HINSTANCE hErr = ShellExecute(GetDesktopWindow(), TEXT("open"), TEXT("notepad.exe"), lpNewFile+nOffset-1, NULL, SW_SHOW);
+                if ( (unsigned int)hErr <= SE_ERR_DLLNOTFOUND)
+                {
+                    ShellExecute(GetDesktopWindow(), TEXT("open"), TEXT("explorer"), lpNewFile, NULL, SW_SHOW);
+                }
             }
             delete []lpNewFile;
         }
