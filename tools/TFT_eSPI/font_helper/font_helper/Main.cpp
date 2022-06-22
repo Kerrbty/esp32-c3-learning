@@ -223,7 +223,7 @@ DWORD WINAPI SaveFontHeaderThread(LPVOID lparam)
     CloseHandle(hFile);
     delete []lpFileName;
     SetDlgItemText(gWnd, IDC_STATUS, TEXT("转换 TFT_eSPI 字库头文件完成"));
-    EnableWindow(GetDlgItem(gWnd, IDC_CreateUnicodesData), TRUE);
+    EnableWindow(GetDlgItem(gWnd, IDC_CreateFontHeader), TRUE);
     return 0;
 }
 
