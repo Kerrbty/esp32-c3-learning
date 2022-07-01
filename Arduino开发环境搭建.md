@@ -8,7 +8,7 @@
 
 ## 设置 Support Soc 表格
 
-设置: 文件 --> 首选项 --> 附加开发板管理器网址 ( 多个用逗号隔开, github使用 [加速地址](https://hub.0z.gs) ,  仓库 [Release 里面有最新表格地址](https://hub.0z.gs/espressif/arduino-esp32/releases) )
+设置: 文件 --> 首选项 --> 附加开发板管理器网址 ( 多个用逗号隔开, github使用加速地址: [https://hub.0z.gs](https://hub.0z.gs) ,  仓库 [Release 里面有最新表格地址](https://hub.0z.gs/espressif/arduino-esp32/releases) )
 
 ```text
 稳定版：
@@ -18,14 +18,17 @@ https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32
 https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json
 ```
 
+![github最新地址](./img/github_soc_table_url.png)
 
 ## 安装扩展插件 
 
-入口:  工具 --> 开发板: "Arduino Uno" --> 开发板管理器 --> 搜索"esp32" --> 搜索结果里面选择版本安装 
+入口:  工具 --> 开发板: "Arduino Uno" --> 开发板管理器 --> 搜索"esp32" --> 搜索结果里面选择版本安装 ( 需要先设置 Support Soc 表格，否则搜索不到esp32库 )
+
+![安装扩展库](./img/search_esp32_library.png)
 
 下载安装包位于: %arduino%/staging/packages (prefereces.txt 目录下)
 
-安装好的库为静态库, 源码在github上:  https://hub.0z.gs/espressif/arduino-esp32
+安装好的库最新版源码在github上:  https://hub.0z.gs/espressif/arduino-esp32
 
 注：第三方开发板均在 preferebces.txt 同目录下 ( 文件--> 首选项 , 在Arduino安装目录下新建一个 portable 目录 即可修改到安装目录下)：
 
@@ -76,6 +79,8 @@ HardwareSerial Serial(0);
 // 注意: sdk 中 Serial1 使用RX 18, TX 19, 与合宙LUATOS不同 
 ```
 
+![文件位置](./img/Arduino_Serial_Code.png)
+
 ## 出现 Arduino 下载程序以后无限重启问题解决 
 
 - 这种情况一般是 bootloader 引导的问题，而 bootloader 相关东西太多 
@@ -83,6 +88,8 @@ HardwareSerial Serial(0);
 - 一般不建议为了升级而替换，有些功能可能会出现问题，比如：WiFiClient 调用 available 就不可用 
 
 注意： idf 的 CONFIG_FREERTOS_HZ 值 默认是 100, 而在 Arduino 中默认是 1000, 所以要把编译配置 sdkconfig 里的 CONFIG_FREERTOS_HZ 改成 1000 ，不然在 Arduino 调用 delay 函数是原来的 10 倍时间 
+
+![配置时钟](./img/sdkconfig_set_freetros_hz.png)
 
 编译完以后，替换 booloader.bin 
 
@@ -110,3 +117,5 @@ HardwareSerial Serial(0);
 
 由于 *.a 文件太多，直接在编译目录  (%pro%/build)  搜索 *.a ,一股脑复制过去就好了(如果有重复的，丢弃build/bootloader/esp-idf下面的文件)，但是编译出来的还缺几个库，需要从原来的lib中复制几个过去 (比如：libbt.a、libbutton.a.... 20来个)  
 ```
+
+![替换目录](./img/replace_bootloader_so.png)
